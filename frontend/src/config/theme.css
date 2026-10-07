@@ -1,0 +1,888 @@
+/**
+ * AgriVision AI — Master Botanical Theme & Design System
+ * ======================================================
+ * You can easily tweak any color, opacity, font or background here!
+ */
+
+:root {
+  /* ── Color Palette: Deep Emeralds & Foliage Greens ────────── */
+  --primary-50:  #f0fdf4;
+  --primary-100: #dcfce7;
+  --primary-200: #bbf7d0;
+  --primary-300: #86efac;
+  --primary-400: #4ade80;
+  --primary-500: #22c55e;
+  --primary-600: #16a34a;
+  --primary-700: #15803d;
+  --primary-800: #166534;
+  --primary-900: #14532d;
+  --primary-950: #052e16;
+
+  /* ── Neutral Slate Canvas ─────────────────────────────────── */
+  --slate-50:  #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+
+  /* ── Functional Status Accents ────────────────────────────── */
+  --red-500:   #ef4444;
+  --red-600:   #dc2626;
+  --amber-500: #f59e0b;
+  --blue-500:  #3b82f6;
+  --teal-500:  #14b8a6;
+
+  /* ── Botanical Glassmorphism Tokens ───────────────────────── */
+  --glass-card-bg: rgba(255, 255, 255, 0.88);
+  --glass-card-border: rgba(255, 255, 255, 0.8);
+  --glass-card-shadow: 0 12px 35px -8px rgba(10, 35, 20, 0.15), 0 4px 12px rgba(0, 0, 0, 0.05);
+  --glass-blur: blur(18px);
+
+  --glass-sidebar-bg: rgba(255, 255, 255, 0.92);
+  --glass-topbar-bg: rgba(255, 255, 255, 0.88);
+
+  /* ── Typography & Radius ──────────────────────────────────── */
+  --font-main: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+  --font-script: 'Caveat', cursive;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+}
+
+/* ── Dark Botanical Mode Overrides ─────────────────────────── */
+[data-theme="botanical-dark"] {
+  --glass-card-bg: rgba(15, 33, 24, 0.82);
+  --glass-card-border: rgba(74, 222, 128, 0.2);
+  --glass-card-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(34, 197, 94, 0.1);
+  --glass-sidebar-bg: rgba(10, 24, 18, 0.92);
+  --glass-topbar-bg: rgba(12, 28, 20, 0.85);
+  --slate-900: #f8fafc;
+  --slate-800: #e2e8f0;
+  --slate-700: #cbd5e1;
+  --slate-600: #94a3b8;
+  --slate-100: #132a1e;
+  --slate-50:  #0d1f16;
+}
+
+/* ── Base App Container with Foliage Background ─────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  color: var(--slate-900);
+  background-color: #0b1f14;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Plant Foliage Background Layer */
+.app-viewport {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(34, 197, 94, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(20, 184, 166, 0.18) 0%, transparent 45%),
+    linear-gradient(135deg, rgba(8, 26, 17, 0.82) 0%, rgba(13, 38, 25, 0.76) 50%, rgba(6, 19, 12, 0.86) 100%),
+    url('/plant_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Atmospheric Ambient Floating Plant Particles */
+.app-viewport::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(rgba(134, 239, 172, 0.08) 1.5px, transparent 1.5px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Layout Framework ───────────────────────────────────────── */
+.app-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  z-index: 2;
+}
+
+.main-content-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.page-body {
+  padding: 24px 32px 64px 32px;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Botanical Glass Cards ──────────────────────────────────── */
+.glass-panel {
+  background: var(--glass-card-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-card-shadow);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.glass-panel:hover {
+  box-shadow: 0 16px 40px -10px rgba(10, 45, 25, 0.2), 0 0 15px rgba(34, 197, 94, 0.12);
+}
+
+/* ── Topbar (Glass Header) ──────────────────────────────────── */
+.av-topbar {
+  background: var(--glass-topbar-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-card-border);
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.av-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.av-sidebar-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--primary-800);
+  border: 1.5px solid var(--primary-300);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.av-sidebar-toggle-btn:hover {
+  background: var(--primary-50);
+  border-color: var(--primary-600);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.2);
+}
+
+.av-topbar-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.av-topbar-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--primary-100);
+  color: var(--primary-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.15);
+}
+
+.av-topbar-title {
+  font-size: 1.28rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  letter-spacing: -0.3px;
+}
+
+.av-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.av-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(240, 253, 244, 0.9);
+  border: 1px solid var(--primary-300);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary-800);
+}
+
+.av-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-500);
+  box-shadow: 0 0 10px var(--primary-500);
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.av-user-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--slate-200);
+  padding: 6px 14px 6px 8px;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--slate-800);
+  transition: all 0.2s ease;
+}
+
+.av-user-chip:hover {
+  background: var(--primary-50);
+  border-color: var(--primary-400);
+}
+
+.av-user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-800));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ── Sidebar (Glass Botanical Menu) ─────────────────────────── */
+.av-sidebar {
+  width: 290px;
+  background: var(--glass-sidebar-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-right: 1px solid var(--glass-card-border);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.3s ease;
+  z-index: 60;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+}
+
+.av-sidebar.collapsed {
+  width: 82px;
+}
+
+.av-sidebar-header {
+  padding: 20px 20px 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.av-brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.av-brand-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #dcfce7 0%, #86efac 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.25);
+  flex-shrink: 0;
+}
+
+.av-brand-text h2 {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--primary-800);
+  line-height: 1.15;
+}
+
+.av-brand-text p {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--slate-500);
+}
+
+/* Active Farm Card in Sidebar */
+.av-farm-badge-box {
+  background: linear-gradient(135deg, rgba(240, 253, 244, 0.95), rgba(220, 252, 231, 0.7));
+  border: 1.5px solid var(--primary-200);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin: 0 16px 16px 16px;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.av-farm-badge-box:hover {
+  transform: translateY(-1px);
+  border-color: var(--primary-400);
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.12);
+}
+
+.av-farm-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+
+.av-farm-status-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--primary-700);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.av-farm-name-txt {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--primary-900);
+}
+
+.av-farm-sub-txt {
+  font-size: 0.78rem;
+  color: var(--slate-600);
+  margin-top: 2px;
+}
+
+/* Nav Menu List */
+.av-nav-list {
+  list-style: none;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.av-nav-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: transparent;
+  color: var(--slate-700);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+}
+
+.av-nav-item-btn:hover {
+  background: rgba(240, 253, 244, 0.8);
+  color: var(--primary-800);
+  transform: translateX(4px);
+}
+
+.av-nav-item-btn.active {
+  background: linear-gradient(90deg, #dcfce7 0%, rgba(240, 253, 244, 0.9) 100%);
+  color: var(--primary-800);
+  font-weight: 800;
+  box-shadow: 0 2px 10px rgba(22, 163, 74, 0.12);
+  border-left: 4px solid var(--primary-600);
+}
+
+.av-nav-icon-wrap {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Sidebar Footer */
+.av-sidebar-footer {
+  padding: 18px 20px;
+  border-top: 1px solid var(--slate-200);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.av-botanical-quote {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary-800);
+}
+
+.av-botanical-subquote {
+  font-family: var(--font-script);
+  font-size: 1.15rem;
+  color: var(--primary-600);
+}
+
+/* ── Hero Banner with Foliage Aesthetic ─────────────────────── */
+.av-hero-banner {
+  background: linear-gradient(135deg, rgba(20, 83, 45, 0.92) 0%, rgba(22, 101, 52, 0.88) 50%, rgba(21, 128, 61, 0.85) 100%),
+              url('/plant_bg.jpg') center/cover;
+  border-radius: var(--radius-xl);
+  padding: 32px 38px;
+  color: white;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 16px 36px -10px rgba(20, 83, 45, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  position: relative;
+  overflow: hidden;
+}
+
+.av-hero-banner::after {
+  content: "🌿";
+  position: absolute;
+  right: 180px;
+  bottom: -20px;
+  font-size: 9rem;
+  opacity: 0.12;
+  pointer-events: none;
+  transform: rotate(15deg);
+}
+
+.av-hero-title-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.av-hero-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.av-hero-title-row h1 {
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+}
+
+.av-hero-desc {
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: #e2e8f0;
+  max-width: 650px;
+}
+
+.av-hero-tagline-box {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.av-hero-script {
+  font-family: var(--font-script);
+  font-size: 2.6rem;
+  color: #bbf7d0;
+  line-height: 1;
+}
+
+.av-hero-script-sub {
+  font-family: var(--font-script);
+  font-size: 2.1rem;
+  color: #ffffff;
+}
+
+/* ── Metric Stat Cards Grid ─────────────────────────────────── */
+.metric-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 1024px) {
+  .metric-grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .metric-grid-4 { grid-template-columns: 1fr; }
+}
+
+.av-metric-card {
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: var(--glass-card-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-card-shadow);
+  transition: all 0.25s ease;
+}
+
+.av-metric-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(15, 50, 30, 0.15);
+}
+
+.av-metric-circle {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.mc-green { background: #dcfce7; color: #166534; }
+.mc-teal  { background: #ccfbf1; color: #115e59; }
+.mc-red   { background: #fee2e2; color: #991b1b; }
+.mc-blue  { background: #dbeafe; color: #1e40af; }
+.mc-amber { background: #fef3c7; color: #92400e; }
+
+.av-metric-info { flex: 1; min-width: 0; }
+.av-metric-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--slate-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+.av-metric-num {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  line-height: 1.15;
+}
+.av-metric-delta {
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.delta-green { color: var(--primary-600); }
+.delta-red   { color: var(--red-500); }
+
+/* ── Interactive Leaf Dropzone & Scanner ─────────────────────── */
+.av-dropzone {
+  border: 2.5px dashed var(--primary-300);
+  background: rgba(240, 253, 244, 0.6);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.av-dropzone:hover, .av-dropzone.drag-active {
+  background: rgba(220, 252, 231, 0.8);
+  border-color: var(--primary-500);
+  transform: scale(1.01);
+}
+
+.dropzone-icon-box {
+  width: 68px;
+  height: 68px;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1.5px solid var(--primary-200);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  margin-bottom: 14px;
+  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.15);
+}
+
+/* AI Scanner Laser Line Effect */
+.scanner-active-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.scanner-laser-line {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #22c55e, #86efac, #22c55e, transparent);
+  box-shadow: 0 0 16px #22c55e, 0 0 24px #4ade80;
+  animation: laser-scan 2s infinite ease-in-out;
+  z-index: 10;
+}
+
+@keyframes laser-scan {
+  0%   { top: 0%; opacity: 0.8; }
+  50%  { top: 96%; opacity: 1; }
+  100% { top: 0%; opacity: 0.8; }
+}
+
+/* ── Primary Buttons & Controls ─────────────────────────────── */
+.btn-primary {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 24px;
+  font-size: 0.96rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 16px rgba(22, 163, 74, 0.35);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+  box-shadow: 0 6px 22px rgba(22, 163, 74, 0.5);
+  transform: translateY(-1.5px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--slate-700);
+  border: 1.5px solid var(--slate-300);
+  border-radius: var(--radius-md);
+  padding: 11px 20px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--slate-100);
+  border-color: var(--primary-500);
+  color: var(--primary-800);
+}
+
+.btn-outline-leaf {
+  background: transparent;
+  color: var(--primary-700);
+  border: 1.5px solid var(--primary-300);
+  border-radius: var(--radius-md);
+  padding: 6px 14px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.btn-outline-leaf:hover {
+  background: var(--primary-100);
+  border-color: var(--primary-600);
+}
+
+/* ── Form Inputs ────────────────────────────────────────────── */
+.input-control {
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px solid var(--slate-300);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--slate-900);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input-control:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+}
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--slate-700);
+  margin-bottom: 6px;
+}
+
+/* ── Severity Badges ────────────────────────────────────────── */
+.sev-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.sev-pill-low     { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+.sev-pill-medium  { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+.sev-pill-high    { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+.sev-pill-healthy { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+
+/* ── Tables ─────────────────────────────────────────────────── */
+.av-table-container {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--slate-200);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.av-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.av-table th {
+  background: rgba(248, 250, 252, 0.9);
+  color: var(--slate-600);
+  font-weight: 700;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--slate-200);
+}
+
+.av-table td {
+  padding: 14px 20px;
+  color: var(--slate-800);
+  border-bottom: 1px solid var(--slate-100);
+  vertical-align: middle;
+}
+
+.av-table tr:hover td {
+  background: rgba(240, 253, 244, 0.6);
+}
+
+.av-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Modal Overlay ──────────────────────────────────────────── */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(5, 20, 12, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid var(--slate-200);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  animation: modal-pop 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes modal-pop {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-header {
+  padding: 20px 26px;
+  border-bottom: 1px solid var(--slate-100);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-body {
+  padding: 24px 26px;
+}
+
+.modal-footer {
+  padding: 16px 26px;
+  border-top: 1px solid var(--slate-100);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  background: var(--slate-50);
+}

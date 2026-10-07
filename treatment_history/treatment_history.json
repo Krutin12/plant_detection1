@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "timestamp": "2026-09-25T20:41:29.431607",
+    "disease": "Moderate_Fungal_Disease",
+    "treatment_type": "organic",
+    "status": "in_progress",
+    "planned_date": "2026-09-25T20:41:29.431629",
+    "notes": "Applied 5ml/L Neem oil spray in early morning. Symptoms arrested."
+  },
+  {
+    "id": 2,
+    "timestamp": "2026-09-27T20:41:29.431636",
+    "disease": "Severe_Plant_Disease",
+    "treatment_type": "chemical",
+    "status": "in_progress",
+    "planned_date": "2026-10-01T20:41:29.431639",
+    "notes": "Systemic fungicide (Copper Hydroxide 2g/L) applied. Second spray scheduled."
+  },
+  {
+    "id": 3,
+    "timestamp": "2026-09-29T20:41:29.431643",
+    "disease": "Early_Disease_Symptoms",
+    "treatment_type": "integrated",
+    "status": "in_progress",
+    "planned_date": "2026-10-02T20:41:29.431647",
+    "notes": "Preventive biological spray + potassium booster."
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "predicted_disease": "Plant_Healthy_Condition",
+    "confidence": 0.965,
+    "timestamp": "2026-09-24T20:41:29.405490",
+    "id": 1
+  },
+  {
+    "predicted_disease": "Moderate_Fungal_Disease",
+    "confidence": 0.912,
+    "timestamp": "2026-09-25T20:41:29.405514",
+    "id": 2
+  },
+  {
+    "predicted_disease": "Early_Disease_Symptoms",
+    "confidence": 0.884,
+    "timestamp": "2026-09-26T20:41:29.405517",
+    "id": 3
+  },
+  {
+    "predicted_disease": "Severe_Plant_Disease",
+    "confidence": 0.941,
+    "timestamp": "2026-09-27T20:41:29.405520",
+    "id": 4
+  },
+  {
+    "predicted_disease": "Plant_Healthy_Condition",
+    "confidence": 0.978,
+    "timestamp": "2026-09-28T20:41:29.405522",
+    "id": 5
+  },
+  {
+    "predicted_disease": "Severe_Plant_Stress",
+    "confidence": 0.893,
+    "timestamp": "2026-09-29T20:41:29.405525",
+    "id": 6
+  },
+  {
+    "predicted_disease": "Moderate_Fungal_Disease",
+    "confidence": 0.925,
+    "timestamp": "2026-09-30T20:41:29.405527",
+    "id": 7
+  },
+  {
+    "timestamp": "2026-09-30T21:30:50.254026",
+    "predicted_disease": "Plant_Healthy_Condition",
+    "confidence": 0.98,
+    "crop": "Cotton",
+    "id": 8
+  }
+]
